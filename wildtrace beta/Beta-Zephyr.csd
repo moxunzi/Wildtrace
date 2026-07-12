@@ -56,25 +56,30 @@ nchnls = 4
 ; =========================================================
 ; [UDO 核心渲染引擎]
 ; =========================================================
+
+
+; [UDO] 四声道空间声像映射
 opcode QuadRender, aaaa, aaaa
     aInL, aInR, aX, aY xin
     
-    aL = sqrt(1 - aX)
-    aR = sqrt(aX)
-    aF = sqrt(aY)
-    aB = sqrt(1 - aY)
+    aX limit aX, 0, 1
+    aY limit aY, 0, 1
 
-    aMono = (aInL + aInR) * 0.5
-    aMono limit aMono, -1, 1
+    aL = cos(aX * 1.5707963)
+    aR = sin(aX * 1.5707963)
+    aF = cos(aY * 1.5707963)
+    aB = sin(aY * 1.5707963)
 
-    aFL = aMono * aL * aF
-    aFR = aMono * aR * aF
-    aRL = aMono * aL * aB
-    aRR = aMono * aR * aB
+    aMid = (aInL + aInR) * 0.5
+    aMid limit aMid, -1, 1
+
+    aFL = aMid * aL * aF
+    aFR = aMid * aR * aF
+    aRL = aMid * aL * aB
+    aRR = aMid * aR * aB
     
     xout aFL, aFR, aRL, aRR
 endop
-
 instr 1
     ; --- 1. 获取 UI 参数 ---
     kFallTime cabbageGetValue "fallTime"
