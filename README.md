@@ -15,3 +15,4 @@ To successfully compile, run, or modify the `.csd` source files in this suite, y
 2. Launch **Cabbage 2.9.0**.
 3. Open any `.csd` file from the `wildtrace beta` directory (e.g., `Beta-Orbita.csd`).
 4. In Cabbage, click `File -> Export Plugin` to compile the source code into a native audio plugin format (**AU / VST / VST3**) compatible with your Digital Audio Workstation (DAW) such as Ableton Live.
+5. Manually place the corresponding GUI texture/image asset files into the compiled plugin's package contents ("Show Package Contents" on macOS) one by one to ensure the custom asset skins render correctly.
